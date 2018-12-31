@@ -7,9 +7,9 @@ function Item(props) {
   const { title, onClick, isActive } = props;
   let style = 'ListItem-item';
   if (isActive) {
-    style = 'ListItem-item active';
+      style = 'ListItem-item active';
   }
-
+  //  console.log(className.onClick);
   return (
     <div className={style} onClick={onClick}>{title}</div>
   );
