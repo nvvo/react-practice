@@ -1,29 +1,14 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-
-import './style.css';
-
-function Panel(props) {
-  const { position } = props;
-
-  let style = 'Panel-left';
-  switch(position) {
-    case 'left':
-      style = 'Panel-left';
-      break;
-    case 'right':
-      style = 'Panel-right';
-      break;
-    default:
-      break;
-  }
-
-  return <div className={style}>{props.children}</div>;
+.Panel-left {
+  width: 50%;
+  height: 100vh;
+  flex: 1 0 0;
+  padding: 15px;
 }
 
-Panel.propTypes = {
-  position: PropTypes.string,
-  children: PropTypes.node,
-};
-
-export default Panel;
+.Panel-right {
+  background-color: #F4F4F4;
+  width: 50%;
+  height: 100vh;
+  flex: 1 0 0;
+  padding: 15px;
+}
