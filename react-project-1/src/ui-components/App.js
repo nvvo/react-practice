@@ -1,6 +1,37 @@
 import React from 'react';
+import {Tab} from './Tab';
 import './App.css';
 
+class Clock extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {date: new Date()};
+  }
+
+  componentDidMount() {
+    this.timerID = setInterval(
+      () => this.tick(),
+      1000
+    );
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.timerID);
+  }
+
+  tick() {
+    this.setState({
+      date: new Date()
+    });
+  }
+
+  render() {
+    return (
+      <button>  {this.state.date.toLocaleTimeString()}
+      </button>
+    );
+  }
+}
 
 class Square extends React.Component {
   constructor(props) {
@@ -156,37 +187,6 @@ class Game extends React.Component {
           <Clock/>
         </div>
       </div>
-    );
-  }
-}
-
-class Clock extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {date: new Date()};
-  }
-
-  componentDidMount() {
-    this.timerID = setInterval(
-      () => this.tick(),
-      1000
-    );
-  }
-
-  componentWillUnmount() {
-    clearInterval(this.timerID);
-  }
-
-  tick() {
-    this.setState({
-      date: new Date()
-    });
-  }
-
-  render() {
-    return (
-      <button>  {this.state.date.toLocaleTimeString()}
-      </button>
     );
   }
 }
