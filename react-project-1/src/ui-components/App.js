@@ -1,5 +1,5 @@
 import React from 'react';
-import {Tab} from './Tab';
+import {myTabs} from './mytabs.js';
 import './App.css';
 
 class Clock extends React.Component {
@@ -173,6 +173,7 @@ class Game extends React.Component {
     
     return (
       <div className="game">
+        <div><mytabs/></div>
         <div className="game-board">
           <Board
             squares={current.squares}
