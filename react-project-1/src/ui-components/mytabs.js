@@ -1,7 +1,7 @@
 import React from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 
-class myTabs extends React.Component {
+class MyTabs extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -35,4 +35,4 @@ class myTabs extends React.Component {
 }
 
 
-export default myTabs;
+export default MyTabs;

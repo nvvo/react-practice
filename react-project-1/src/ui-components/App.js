@@ -1,11 +1,49 @@
 import React from 'react';
-import {myTabs} from './mytabs.js';
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import 'react-tabs/style/react-tabs.css';
 import './App.css';
+
+class MyTabs extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      posts: [
+        { id: 0, title: "Trump", text: "US President" },
+        { id: 1, title: "Ivanka", text: "Russia President" },
+        { id: 2, title: "Kushner", text: "Campuchia President" }
+      ],
+    }
+  }
+  render() {
+    const title = this.state.posts.map((x) => {
+      return (<Tab key={x.id}>{x.title}</Tab>)
+
+    });
+    const text = this.state.posts.map((x) => {
+      return (<TabPanel key={x.id}>{x.text}</TabPanel>)
+    });
+    const displayTab = (
+      <Tabs defaultIndex={0} onSelect={index => console.log(index)}>
+        <TabList>
+          {title}
+        </TabList>
+          {text}
+      </Tabs >
+    );
+    return (
+      <div>
+        {displayTab}
+      </div>
+
+    );
+  }
+}
+
 
 class Clock extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {date: new Date()};
+    this.state = { date: new Date() };
   }
 
   componentDidMount() {
@@ -50,7 +88,7 @@ class Square extends React.Component {
   }
 }
 
-class Board extends React.Component {  
+class Board extends React.Component {
   renderSquare(i) {
     return (
       <Square
@@ -96,9 +134,9 @@ class Game extends React.Component {
       stepNumber: 0,
       xIsNext: true,
     };
-    this.calculateWinner=this.calculateWinner.bind(this);
-    this.handleClick=this.handleClick.bind(this);
-    this.jumpTo=this.jumpTo.bind(this);
+    this.calculateWinner = this.calculateWinner.bind(this);
+    this.handleClick = this.handleClick.bind(this);
+    this.jumpTo = this.jumpTo.bind(this);
   }
 
   calculateWinner(squares) {
@@ -169,11 +207,11 @@ class Game extends React.Component {
     } else {
       status = "Next player: " + (this.state.xIsNext ? "X" : "O");
     }
-    
-    
+
+
     return (
       <div className="game">
-        <div><mytabs/></div>
+        <div><MyTabs /></div>
         <div className="game-board">
           <Board
             squares={current.squares}
@@ -185,7 +223,7 @@ class Game extends React.Component {
           <ol>{moves}</ol>
         </div>
         <div>
-          <Clock/>
+          <Clock />
         </div>
       </div>
     );
