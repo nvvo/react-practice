@@ -3,23 +3,111 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import './App.css';
 
-class MyTabs extends React.Component {
+class MyTabList2 extends React.Component {
+  render() {
+    return  <div>{this.props.children}</div>
+  }
+}
+
+class MyTabList extends React.Component {
+  state = {
+    activeIndex: 0
+  };
+
+  onTabChange(activeIndex) {
+    this.setState({ activeIndex });
+  }
+
+  render() {
+    const children = this.props.children;
+    console.log("Tab list children", children);
+
+    const titles = children.map(t => {
+      return t.props.children[0].props.children
+    });
+    console.log("Tab list tiles", titles);
+
+    const contents = children.map(t => {
+      return t.props.children[1].props.children
+    });
+    console.log("Tab list contents", contents);
+    const { activeIndex } = this.state;
+
+    return (
+      <div class="container">
+        <div class="tabList">
+          {titles.map((title, index) => (
+            <div
+              key={index}
+              onClick={() => this.onTabChange(index)}
+              class={`tab ${index === activeIndex ? "active" : ""}`}
+            >
+              {title}
+            </div>
+          ))}
+        </div>
+        <div class="tabContent">{contents[activeIndex]}</div>
+      </div>
+    );
+  }
+}
+
+class MyTab extends React.Component {
+  render() {
+    return null;
+  }
+}
+class MyTitle extends React.Component {
+  render() {
+    return null;
+  }
+}
+class MyContent extends React.Component {
+  render() {
+    return null;
+  }
+}
+class TabContainer extends React.Component {
+  render() {
+    return (
+      <MyTabList>
+        <MyTab>
+          <MyTitle>Title 10</MyTitle>
+          <MyContent>Content 10</MyContent>ƒ
+        </MyTab>
+        <MyTab>
+          <MyTitle>Title 20</MyTitle>
+          <MyContent>Content 20</MyContent>
+        </MyTab>
+        <MyTab>
+          <MyTitle>Title 30</MyTitle>
+          <MyContent>Content 30</MyContent>
+        </MyTab>
+      </MyTabList>
+    );
+  }
+}
+
+
+
+class ReactTabContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      posts: [
-        { id: 0, title: "Trump", text: "US President" },
-        { id: 1, title: "Ivanka", text: "Russia President" },
-        { id: 2, title: "Kushner", text: "Campuchia President" }
+      tabList: [
+        { index: 0, title: "Trump", text: "US President" },
+        { index: 1, title: "Putin", text: "Russia President" },
+        { index: 2, title: "Kim Jong Un", text: "North Korea President" },
+        { index: 3, title: "Nguyen Phu Trong", text: "Vietnam President" }
       ],
     }
   }
   render() {
-    const title = this.state.posts.map((x) => {
+    const title = this.state.tabList.map((x) => {
       return (<Tab key={x.id}>{x.title}</Tab>)
 
     });
-    const text = this.state.posts.map((x) => {
+    const text = this.state.tabList.map((x) => {
       return (<TabPanel key={x.id}>{x.text}</TabPanel>)
     });
     const displayTab = (
@@ -27,7 +115,7 @@ class MyTabs extends React.Component {
         <TabList>
           {title}
         </TabList>
-          {text}
+        {text}
       </Tabs >
     );
     return (
@@ -210,22 +298,26 @@ class Game extends React.Component {
 
 
     return (
-      <div className="game">
-        <div><MyTabs /></div>
-        <div className="game-board">
-          <Board
-            squares={current.squares}
-            onClick={(i) => this.handleClick(i)}
-          />
-        </div>
-        <div className="game-info">
-          <div>{status}</div>
-          <ol>{moves}</ol>
-        </div>
-        <div>
-          <Clock />
-        </div>
+      <div>
+        <TabContainer />
       </div>
+      // <div className="game">
+
+      //     <div className="game-board">
+      //       <Board
+      //         squares={current.squares}
+      //         onClick={(i) => this.handleClick(i)}
+      //       />
+      //     </div>
+      //     <div className="game-info">
+      //       <div>{status}</div>
+      //       <ol>{moves}</ol>
+      //     </div>
+      //     <div>
+      //       <Clock />
+      //     </div>
+      //   </div>
+      // </div>
     );
   }
 }

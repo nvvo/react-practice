@@ -48,3 +48,32 @@ ol, ul {
 .game-info {
   margin-left: 20px;
 }
+.tabList{
+  display:flex;
+}
+
+.container{
+  border-radius:5px;
+  overflow:hidden;
+  width:600px;
+  margin:auto;
+}
+
+.tab{
+  width:100%;
+  padding:20px;
+  text-align:center;
+  color:white;
+  text-transform:uppercase;
+  border-right:1px solid white;
+  background:lightgrey;
+}
+.tabContent{
+  background:lightcoral;
+  min-height:300px;
+  padding:10px;
+  
+}
+.active{
+    background:lightcoral;
+}
